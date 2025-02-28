@@ -1,0 +1,14 @@
+<div class="intro-container">
+  <div class="demo-component">
+    <lib-primary-btn class="button" (click)="startTutorial()">Start Tutorial</lib-primary-btn>
+  </div>
+  <div class="demo-component">
+    <lib-primary-btn class="button">Lorem</lib-primary-btn>
+  </div>
+
+  <div class="input-list">
+    <div *ngFor="let item of testInputs">
+      <input type="text" class="input-field" [placeholder]="item" />
+    </div>
+  </div>
+</div>

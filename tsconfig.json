@@ -17,7 +17,9 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "projects/nextsapien-component-lib/src/public-api": ["./node_modules/nextsapien-component-lib"]
-    }
+    },
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

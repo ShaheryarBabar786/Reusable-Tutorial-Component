@@ -1,0 +1,36 @@
+.tutorial-screen-container {
+  display: flex;
+  height: 100vh;
+  background: #1a171e;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar button.active,
+.sidebar button:hover {
+  background: #ff007f;
+  border-radius: 50%;
+}
+
+.content-area {
+  flex-grow: 1;
+  background: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
