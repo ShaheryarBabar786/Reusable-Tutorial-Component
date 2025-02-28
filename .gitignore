@@ -5,3 +5,4 @@ dist/
 .git/
 
 .angular/cache
+.angular/cache/
