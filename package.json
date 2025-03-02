@@ -24,6 +24,7 @@
     "@angular/router": "^17.0.6",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "date-fns": "^4.1.0",
     "nextsapien-component-lib": "^1.0.27",
     "ngx-bootstrap": "^12.0.0",
     "rxjs": "~7.8.1",
