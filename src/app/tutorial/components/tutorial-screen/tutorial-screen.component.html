@@ -1,16 +1,16 @@
 <div class="tutorial-container">
-  <!-- Sidebar with buttons -->
-  <div class="sidebar">
-    <button *ngFor="let item of tutorialItems" (click)="selectItem(item)" [class.active]="selectedItem === item">
-      {{ item.label }}
-    </button>
+  <!-- Left Side Content -->
+  <div class="content-box">
+    <div class="selected-content">
+      {{ selectedItem.content }}
+    </div>
   </div>
 
-  <!-- Content display area -->
-  <div class="content-area">
-    <ng-container *ngIf="selectedItem">
-      <h2>{{ selectedItem.label }}</h2>
-      <p>{{ selectedItem.content }}</p>
-    </ng-container>
+  <!-- Right Side Buttons -->
+  <div class="buttons-container">
+    <button *ngFor="let item of tutorialItems" (click)="selectItem(item)" class="icon-button" [class.active]="selectedItem === item">
+      <img [src]="item.icon" [alt]="item.label" />
+      <span>{{ item.label }}</span>
+    </button>
   </div>
 </div>
