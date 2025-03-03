@@ -1,68 +1,179 @@
 .tutorial-container {
+  width: 30vw;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   background: #121118;
   color: white;
   padding: 20px;
-  height: 100vh;
+  height: 85vh;
+  position: relative;
+}
 
-  .content-box {
-    flex: 2;
-    padding: 20px;
-    font-size: 16px;
-    line-height: 1.5;
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
 
-    .highlight {
-      color: red;
-      font-weight: bold;
-    }
+.content-area {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .note {
-      font-size: 12px;
-      color: gray;
-    }
+.content-box {
+  flex: 1;
 
-    .selected-content {
-      margin-top: 20px;
-      background: #333;
-      padding: 10px;
-      border-radius: 8px;
-    }
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 60%;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* Styling the buttons container */
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  transform: scale(calc(1 + (min(100vw, 100vh) - 600px) / 1000));
+  transform-origin: top left;
+}
+
+/* Wrapper for button + label */
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.button-wrapper:nth-child(9) {
+  position: absolute;
+  top: 370px;
+  right: 50px;
+}
+.button-wrapper:nth-child(10) {
+  position: absolute;
+  top: 410px;
+  right: 100px;
+}
+.button-wrapper:nth-child(11) {
+  position: absolute;
+  top: 450px;
+  right: 50px;
+}
+
+/* Styling for button label */
+.button-label {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+
+/* Styling for the lib-icon-btn */
+lib-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(52.89% 52.89% at 38.63% 62.91%, rgba(247, 247, 247, 0) 78.64%, rgba(255, 255, 255, 0.52) 88.75%, rgba(247, 247, 247, 0) 100%);
+  box-shadow: inset 5px 5px 12px rgba(255, 255, 255, 0.15), inset -5px -5px 12px rgba(0, 0, 0, 0.7), 0px 5px 15px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Light Effect */
+lib-icon-btn::before {
+  content: '';
+  position: absolute;
+  left: 2.94%;
+  right: 2.94%;
+  top: 2.94%;
+  bottom: 2.94%;
+  background: radial-gradient(89.22% 89.22% at 57.33% 6.03%, rgba(247, 247, 247, 0) 85.09%, rgba(255, 255, 255, 0.25) 100%),
+    radial-gradient(85.48% 85.48% at 52.12% 88.5%, rgba(247, 247, 247, 0) 85.09%, rgba(255, 255, 255, 0.25) 100%);
+  opacity: 0.8;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* Inner Glow Effect */
+lib-icon-btn::after {
+  content: '';
+  position: absolute;
+  left: 5.37%;
+  right: 5.37%;
+  top: 5.37%;
+  bottom: 5.37%;
+  background: radial-gradient(52.89% 52.89% at 38.63% 62.91%, rgba(247, 247, 247, 0) 78.64%, rgba(255, 255, 255, 0.52) 88.75%, rgba(247, 247, 247, 0) 100%);
+  opacity: 0.8;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* Hover Effect */
+lib-icon-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Active / Selected State */
+lib-icon-btn.active {
+  border: 2px solid #e3a750;
+  box-shadow: 0 0 10px #e3a750;
+  animation: pulse-animate 2s infinite;
+}
+
+/* Icon inside button */
+lib-icon-btn span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
+  position: relative;
+  z-index: 1; /* Ensure icon appears above the background effects */
+}
+
+lib-icon-btn span svg {
+  width: 50%;
+  height: 50%;
+  fill: rgba(255, 255, 255, 0.8);
+}
+
+/* Animation for Active State */
+@keyframes pulse-animate {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(227, 167, 80, 0.5);
   }
-
-  .buttons-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .icon-button {
-      background: none;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 10px;
-      padding: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
-
-      img {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 5px;
-      }
-
-      span {
-        font-size: 12px;
-      }
-
-      &:hover,
-      &.active {
-        transform: scale(1.1);
-        color: red;
-      }
-    }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 10px 5px rgba(227, 167, 80, 0.3);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(227, 167, 80, 0);
   }
 }

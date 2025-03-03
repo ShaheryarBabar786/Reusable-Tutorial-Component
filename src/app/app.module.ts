@@ -10,6 +10,7 @@ import { ButtonsModule } from 'nextsapien-component-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
+import { TutorialModule } from './tutorial/tutorial.module'; // ✅ Import the TutorialModule
 
 export const httpLoaderFactory = (http: HttpBackend): TranslateHttpLoader => new TranslateHttpLoader(new HttpClient(http), './assets/i18n/', '.json');
 
@@ -30,6 +31,7 @@ export const httpLoaderFactory = (http: HttpBackend): TranslateHttpLoader => new
       },
     }),
     AppRoutingModule,
+    TutorialModule, // ✅ Add this line
   ],
   providers: [],
   bootstrap: [AppComponent],
