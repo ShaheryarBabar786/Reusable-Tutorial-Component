@@ -1,22 +1,25 @@
-<div class="tutorial-container">
-  <!-- Top Close Button -->
-  <button class="close-btn" (click)="closeTutorial()">&#10005;</button>
+<div class="container">
+  <div class="tutorial-wrapper">
+    <div class="tutorial-container">
+      <!-- Top Close Button -->
+      <button class="close-btn" (click)="closeTutorial()">&#10005;</button>
 
-  <div class="content-area">
-    <!-- Left Side: Dynamic Content -->
-    <div class="content-box" *ngIf="selectedItem">
-      <h2>{{ selectedItem.label }}</h2>
-      <p>{{ selectedItem.content }}</p>
-    </div>
+      <div class="content-area">
+        <!-- Left Side: Dynamic Content -->
+        <div class="content-box" *ngIf="selectedItem">
+          <h2>{{ selectedItem.label }}</h2>
+          <p>{{ selectedItem.content }}</p>
+        </div>
 
-    <!-- Right Side: Navigation Buttons -->
-    <div class="buttons-container">
-      <div class="button-wrapper" *ngFor="let item of tutorialItems">
-        <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
-          <span [innerHTML]="item.icon"></span>
-        </lib-icon-btn>
-        <span class="button-label">{{ item.label }}</span>
-        <!-- Label below button -->
+        <!-- Right Side: Navigation Buttons -->
+        <div class="buttons-container">
+          <div class="button-wrapper" *ngFor="let item of tutorialItems">
+            <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
+              <span [innerHTML]="item.icon"></span>
+            </lib-icon-btn>
+            <span class="button-label">{{ item.label }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

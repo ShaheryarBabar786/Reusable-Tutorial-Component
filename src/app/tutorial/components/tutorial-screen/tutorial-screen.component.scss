@@ -1,15 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.tutorial-wrapper {
+  transform: scale(calc(min(100vw, 100vh) / 800));
+  transform-origin: center;
+}
+
 .tutorial-container {
-  width: 30vw;
+  width: clamp(300px, 30vw, 600px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background: #121118;
   color: white;
   padding: 20px;
-  height: 85vh;
+  box-sizing: border-box;
   position: relative;
 }
-
 .close-btn {
   position: absolute;
   top: 10px;
@@ -175,5 +190,49 @@ lib-icon-btn span svg {
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(227, 167, 80, 0);
+  }
+}
+/* Media query for mobile devices */
+/* Media query for mobile devices */
+@media (max-width: 600px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8); /* Optional: Add a dark overlay */
+    overflow: hidden; /* Prevent any overflow */
+  }
+
+  .tutorial-wrapper {
+    width: 100%; /* Take up full width */
+    height: 100%; /* Take up full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: none; /* Remove scaling for mobile */
+  }
+
+  .tutorial-container {
+    width: 100%; /* Take up full width */
+    height: 100%; /* Take up full height */
+    max-width: none; /* Remove max-width restriction */
+    min-width: auto; /* Remove min-width restriction */
+    padding: 15px; /* Reduce padding for smaller screens */
+    transform: none; /* Remove scaling for mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    overflow: auto; /* Allow scrolling if content overflows */
+  }
+
+  /* Hide other elements (if any) */
+  .container > *:not(.tutorial-wrapper) {
+    display: none;
   }
 }
