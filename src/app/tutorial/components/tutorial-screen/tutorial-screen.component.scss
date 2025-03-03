@@ -116,6 +116,7 @@ lib-icon-btn {
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   position: relative;
   overflow: hidden;
+  filter: drop-shadow(0px 4px 4px #000000);
 }
 
 /* Light Effect */
@@ -155,9 +156,7 @@ lib-icon-btn:hover {
 
 /* Active / Selected State */
 lib-icon-btn.active {
-  border: 2px solid #e3a750;
-  box-shadow: 0 0 10px #e3a750;
-  animation: pulse-animate 2s infinite;
+  border: 0.400336px solid #255685;
 }
 
 /* Icon inside button */
@@ -168,7 +167,7 @@ lib-icon-btn span {
   width: 80%;
   height: 80%;
   position: relative;
-  z-index: 1; /* Ensure icon appears above the background effects */
+  z-index: 1;
 }
 
 lib-icon-btn span svg {
