@@ -2,7 +2,7 @@
   <div class="tutorial-wrapper">
     <div class="tutorial-container">
       <!-- Top Close Button -->
-      <button class="close-btn" (click)="closeTutorial()">&#10005;</button>
+      <lib-icon-btn class="close-btn" (click)="closeTutorial()"> &#10005; </lib-icon-btn>
 
       <div class="content-area">
         <!-- Left Side: Dynamic Content -->
@@ -17,7 +17,7 @@
             <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
               <span [innerHTML]="item.icon"></span>
             </lib-icon-btn>
-            <span class="button-label">{{ item.label }}</span>
+            <span class="button-label" [innerHTML]="formatLabel(item.label)"></span>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* General container styling */
 .container {
   display: flex;
   justify-content: center;
@@ -9,11 +10,13 @@
   left: 0;
 }
 
+/* Tutorial wrapper scaling */
 .tutorial-wrapper {
   transform: scale(calc(min(100vw, 100vh) / 800));
   transform-origin: center;
 }
 
+/* Tutorial container styling */
 .tutorial-container {
   width: clamp(300px, 30vw, 600px);
   display: flex;
@@ -25,17 +28,20 @@
   box-sizing: border-box;
   position: relative;
 }
+
+/* Close button styling */
 .close-btn {
   position: absolute;
   top: 10px;
   left: 15px;
-  background: transparent;
   border: none;
   color: white;
+  box-shadow: none;
   font-size: 24px;
   cursor: pointer;
 }
 
+/* Content area styling */
 .content-area {
   display: flex;
   flex-direction: row;
@@ -45,32 +51,32 @@
   justify-content: space-between;
 }
 
+/* Content box styling */
 .content-box {
   flex: 1;
-
   text-align: left;
   font-size: 16px;
   line-height: 1.5;
   max-width: 60%;
 }
 
+/* Paragraph styling */
 p {
   font-size: 16px;
   margin-bottom: 15px;
 }
 
-/* Styling the buttons container */
+/* Buttons container styling */
 .buttons-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-
   transform: scale(calc(1 + (min(100vw, 100vh) - 600px) / 1000));
   transform-origin: top left;
 }
 
-/* Wrapper for button + label */
+/* Button wrapper styling */
 .button-wrapper {
   display: flex;
   flex-direction: column;
@@ -78,30 +84,81 @@ p {
   margin-bottom: 10px;
 }
 
+/* Specific button wrapper adjustments */
+.button-wrapper:nth-child(6) lib-icon-btn {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  right: 7px;
+}
+
+.button-wrapper:nth-child(6) .button-label {
+  position: relative;
+  right: 7px;
+  font-size: 10px;
+}
+
+.button-wrapper:nth-child(7) lib-icon-btn {
+  width: 55px;
+  height: 55px;
+  position: relative;
+  right: 10px;
+}
+
+.button-wrapper:nth-child(7) .button-label {
+  position: relative;
+  right: 10px;
+  font-size: 10px;
+}
+
+.button-wrapper:nth-child(7) lib-icon-btn span {
+  width: 70%;
+  height: 70%;
+}
+
+.button-wrapper:nth-child(8) lib-icon-btn {
+  position: relative;
+  right: 5px;
+  bottom: 7px;
+}
+
+.button-wrapper:nth-child(8) .button-label {
+  position: relative;
+  right: 4px;
+  bottom: 5px;
+}
+
 .button-wrapper:nth-child(9) {
   position: absolute;
   top: 370px;
-  right: 50px;
+  right: 60px;
 }
+
 .button-wrapper:nth-child(10) {
   position: absolute;
-  top: 410px;
-  right: 100px;
+  top: 420px;
+  right: 90px;
 }
+
 .button-wrapper:nth-child(11) {
   position: absolute;
-  top: 450px;
-  right: 50px;
+  top: 470px;
+  right: 65px;
 }
 
-/* Styling for button label */
+/* Button label styling */
 .button-label {
-  font-size: 14px;
-  color: white;
   text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 160%;
+  color: #ffffff;
+  position: relative;
+  bottom: 4px;
 }
 
-/* Styling for the lib-icon-btn */
+/* lib-icon-btn base styling */
 lib-icon-btn {
   display: flex;
   align-items: center;
@@ -110,16 +167,15 @@ lib-icon-btn {
   height: 40px;
   border-radius: 50%;
   background: radial-gradient(52.89% 52.89% at 38.63% 62.91%, rgba(247, 247, 247, 0) 78.64%, rgba(255, 255, 255, 0.52) 88.75%, rgba(247, 247, 247, 0) 100%);
-  box-shadow: inset 5px 5px 12px rgba(255, 255, 255, 0.15), inset -5px -5px 12px rgba(0, 0, 0, 0.7), 0px 5px 15px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: -3px -2px 10px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   position: relative;
   overflow: hidden;
-  filter: drop-shadow(0px 4px 4px #000000);
 }
 
-/* Light Effect */
+/* Light effect for lib-icon-btn */
 lib-icon-btn::before {
   content: '';
   position: absolute;
@@ -134,7 +190,7 @@ lib-icon-btn::before {
   z-index: 0;
 }
 
-/* Inner Glow Effect */
+/* Inner glow effect for lib-icon-btn */
 lib-icon-btn::after {
   content: '';
   position: absolute;
@@ -148,35 +204,31 @@ lib-icon-btn::after {
   z-index: 0;
 }
 
-/* Hover Effect */
+/* Hover effect for lib-icon-btn */
 lib-icon-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
 }
 
-/* Active / Selected State */
+/* Active state for lib-icon-btn */
 lib-icon-btn.active {
   border: 0.400336px solid #255685;
 }
 
-/* Icon inside button */
+/* Icon inside lib-icon-btn */
 lib-icon-btn span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
-  height: 80%;
   position: relative;
   z-index: 1;
 }
 
+/* SVG icon styling */
 lib-icon-btn span svg {
-  width: 50%;
-  height: 50%;
   fill: rgba(255, 255, 255, 0.8);
 }
 
-/* Animation for Active State */
+/* Pulse animation for active state */
 @keyframes pulse-animate {
   0% {
     transform: scale(0.95);
@@ -191,46 +243,38 @@ lib-icon-btn span svg {
     box-shadow: 0 0 0 0 rgba(227, 167, 80, 0);
   }
 }
-/* Media query for mobile devices */
-/* Media query for mobile devices */
+
+/* Mobile-specific styles */
 @media (max-width: 600px) {
   .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8); /* Optional: Add a dark overlay */
-    overflow: hidden; /* Prevent any overflow */
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
   }
 
   .tutorial-wrapper {
-    width: 100%; /* Take up full width */
-    height: 100%; /* Take up full height */
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: none; /* Remove scaling for mobile */
+    transform: none;
   }
 
   .tutorial-container {
-    width: 100%; /* Take up full width */
-    height: 100%; /* Take up full height */
-    max-width: none; /* Remove max-width restriction */
-    min-width: auto; /* Remove min-width restriction */
-    padding: 15px; /* Reduce padding for smaller screens */
-    transform: none; /* Remove scaling for mobile */
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    min-width: auto;
+    padding: 15px;
+    transform: none;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    overflow: auto; /* Allow scrolling if content overflows */
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
   }
 
-  /* Hide other elements (if any) */
+  /* Hide other elements on mobile */
   .container > *:not(.tutorial-wrapper) {
     display: none;
   }

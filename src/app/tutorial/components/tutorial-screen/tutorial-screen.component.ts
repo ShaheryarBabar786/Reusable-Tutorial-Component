@@ -11,7 +11,7 @@ import { TutorialScreen } from '../../components/tutorial-screen/tutorial-screen
 export class TutorialScreenComponent {
   tutorialItems: TutorialScreen[] = [];
 
-  selectedItem: TutorialScreen | null = null; // No default selection
+  selectedItem: TutorialScreen | null = null;
 
   constructor(private sanitizer: DomSanitizer) {
     this.tutorialItems = [
@@ -42,7 +42,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 3,
-        label: 'Help',
+        label: 'Prep',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 4,
-        label: 'Help',
+        label: 'Location',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 5,
-        label: 'Help',
+        label: 'Chat',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 6,
-        label: 'Help',
+        label: 'More',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="11" height="4" viewBox="0 0 11 4" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 7,
-        label: 'Help',
+        label: 'Selfie & Video Required',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +102,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 8,
-        label: 'Help',
+        label: 'Face',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +113,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 9,
-        label: 'Help',
+        label: 'Begin',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +124,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 10,
-        label: 'Help',
+        label: 'Outfit',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,7 +135,7 @@ export class TutorialScreenComponent {
       },
       {
         id: 11,
-        label: 'Help',
+        label: 'Video',
         content: 'Help Content',
         icon: this.sanitize(`
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,5 +161,11 @@ export class TutorialScreenComponent {
 
   closeTutorial(): void {
     console.log('Tutorial closed');
+  }
+  formatLabel(label: string): string {
+    if (label.length > 14) {
+      return label.slice(0, 14) + '<br>' + label.slice(14);
+    }
+    return label;
   }
 }
