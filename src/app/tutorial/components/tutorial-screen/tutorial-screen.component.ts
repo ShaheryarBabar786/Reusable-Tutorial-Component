@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TutorialScreen } from '../../components/tutorial-screen/tutorial-screen.types';
+import { TutorialService } from '../../services/tutorial.service';
 
 @Component({
   selector: 'app-tutorial-screen',
-
   templateUrl: './tutorial-screen.component.html',
   styleUrl: './tutorial-screen.component.scss',
 })
@@ -12,7 +12,10 @@ export class TutorialScreenComponent {
   tutorialItems: TutorialScreen[] = [];
   selectedItem: TutorialScreen | null = null;
 
-  constructor(private sanitizer: DomSanitizer, private tutorialService: TutorialService) {}
+  constructor(
+    @Inject(DomSanitizer) private sanitizer: DomSanitizer,
+    private tutorialService: TutorialService,
+  ) {}
 
   ngOnInit(): void {
     this.tutorialService.getTutorialScreens().subscribe((data) => {
@@ -27,7 +30,6 @@ export class TutorialScreenComponent {
 
   selectItem(item: TutorialScreen): void {
     this.selectedItem = item;
-    console.log(Selected tutorial: ${item.label});
   }
 
   closeTutorial(): void {
@@ -39,5 +41,5 @@ export class TutorialScreenComponent {
       return label.slice(0, 14) + '<br>' + label.slice(14);
     }
     return label;
-
+  }
 }
