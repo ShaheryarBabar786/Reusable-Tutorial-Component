@@ -7,6 +7,7 @@ import { TutorialService } from '../../services/tutorial.service';
   selector: 'app-tutorial-screen',
   templateUrl: './tutorial-screen.component.html',
   styleUrl: './tutorial-screen.component.scss',
+  standalone: false,
 })
 export class TutorialScreenComponent {
   tutorialItems: TutorialScreen[] = [];

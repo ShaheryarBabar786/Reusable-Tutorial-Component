@@ -8,5 +8,6 @@ import { TutorialComponent } from './tutorial.component';
 @NgModule({
   declarations: [TutorialComponent, TutorialScreenComponent], // ✅ Make sure both components are here
   imports: [CommonModule, TutorialRoutingModule, ButtonsModule], // ✅ Ensure required modules are imported
+  exports: [TutorialComponent, TutorialScreenComponent],
 })
 export class TutorialModule {}
