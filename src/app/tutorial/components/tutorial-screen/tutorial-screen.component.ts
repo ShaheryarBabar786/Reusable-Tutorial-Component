@@ -42,4 +42,12 @@ export class TutorialScreenComponent {
     }
     return label;
   }
+  formatContent(content: string): SafeHtml {
+    if (!content) return '';
+
+    // Replace [[text]] with <span class="custom-highlight">text</span>
+    const formattedContent = content.replace(/\[\[(.*?)\]\]/g, '<span class="custom-highlight">$1</span>');
+
+    return this.sanitizer.bypassSecurityTrustHtml(formattedContent);
+  }
 }

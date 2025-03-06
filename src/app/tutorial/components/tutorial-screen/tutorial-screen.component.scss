@@ -62,8 +62,22 @@
 
 /* Paragraph styling */
 p {
-  font-size: 16px;
+  font-family: 'Gilroy-Regular', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
   margin-bottom: 15px;
+}
+.custom-highlight {
+  font-family: 'Gilroy-SemiBold', sans-serif;
+  color: #ff4e88 !important; /* Ensures correct color */
+  text-shadow: 0 0 10px rgba(255, 78, 136, 0.8);
+
+  background: none !important;
+  background-color: transparent !important;
+  padding: 0;
+  display: inline;
 }
 
 /* Buttons container styling */
@@ -170,7 +184,9 @@ lib-icon-btn {
   box-shadow: -3px -2px 10px rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   position: relative;
   overflow: hidden;
 }
@@ -183,7 +199,8 @@ lib-icon-btn::before {
   right: 2.94%;
   top: 2.94%;
   bottom: 2.94%;
-  background: radial-gradient(89.22% 89.22% at 57.33% 6.03%, rgba(247, 247, 247, 0) 85.09%, rgba(255, 255, 255, 0.25) 100%),
+  background:
+    radial-gradient(89.22% 89.22% at 57.33% 6.03%, rgba(247, 247, 247, 0) 85.09%, rgba(255, 255, 255, 0.25) 100%),
     radial-gradient(85.48% 85.48% at 52.12% 88.5%, rgba(247, 247, 247, 0) 85.09%, rgba(255, 255, 255, 0.25) 100%);
   opacity: 0.8;
   border-radius: 50%;
