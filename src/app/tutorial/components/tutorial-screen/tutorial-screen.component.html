@@ -1,21 +1,23 @@
 <div class="container">
   <div class="tutorial-wrapper">
     <div class="tutorial-container">
-      <!-- Top Close Button -->
       <lib-icon-btn class="close-btn" (click)="closeTutorial()"> &#10005; </lib-icon-btn>
 
       <div class="content-area">
         <!-- Left Side: Dynamic Content -->
         <div class="content-box" *ngIf="selectedItem">
-          <p [innerHTML]="formatContent(selectedItem.content)"></p>
+          <p #contentBox [innerHTML]="formatContent(selectedItem.content)"></p>
         </div>
 
         <!-- Right Side: Navigation Buttons -->
         <div class="buttons-container">
-          <div class="button-wrapper" *ngFor="let item of tutorialItems">
-            <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
-              <span [innerHTML]="sanitize(item.icon)"></span>
-            </lib-icon-btn>
+          <div class="button-wrapper" *ngFor="let item of tutorialItems; let i = index">
+            <!-- Wrap lib-icon-btn with a native element and add #button reference -->
+            <div #button>
+              <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
+                <span [innerHTML]="sanitize(item.icon)"></span>
+              </lib-icon-btn>
+            </div>
             <span class="button-label" [innerHTML]="formatLabel(item.label)"></span>
           </div>
         </div>

@@ -45,6 +45,7 @@
 /** *************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
+import 'core-js/stable';
 import 'zone.js'; // Included with Angular CLI.
 (window as any).global = window;
 
