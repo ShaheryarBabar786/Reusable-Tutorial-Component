@@ -33,6 +33,13 @@ export class TutorialScreenComponent implements AfterViewInit {
   ngOnInit(): void {
     const storedLang = localStorage.getItem('selectedLanguage') || 'en';
     this.translateService.use(storedLang);
+    this.route.queryParams.subscribe((params) => {
+      console.log('Query Params:', params); // Debugging
+      if (params['openModal'] === 'true') {
+        console.log('Opening Modal'); // Debugging
+        this.toggleModal = true;
+      }
+    });
 
     this.translateService.onLangChange.subscribe(() => {
       this.loadTutorialScreens();
@@ -41,10 +48,8 @@ export class TutorialScreenComponent implements AfterViewInit {
     this.loadTutorialScreens();
 
     this.route.queryParams.subscribe((params) => {
-      console.log('Query Params:', params); // 🔍 Debugging Log
       if (params['openModal'] === 'true') {
         this.toggleModal = true; // 🔥 Set modal to open
-        console.log('Modal should open:', this.toggleModal); // 🔍 Debugging Log
       }
     });
   }
@@ -79,19 +84,31 @@ export class TutorialScreenComponent implements AfterViewInit {
   }
 
   setContentMargins(item: any) {
-    // Example: If the content length exceeds a certain threshold, add more margin to the top
-    let topMargin = '20px'; // Default margin
-    if (item.content.length > 100) {
-      // Example condition, adjust based on your requirements
-      topMargin = '0px';
+    let topMargin = '20px';
+
+    if (window.innerWidth <= 768) {
+      // Mobile View
+      if (item.content.length > 150) {
+        topMargin = '5px'; // Less margin for long content
+      } else if (item.content.length > 100) {
+        topMargin = '15px'; // Medium-length content
+      } else {
+        topMargin = '40px'; // More margin for short content
+      }
+    } else {
+      // Desktop View
+      if (item.content.length > 150) {
+        topMargin = '0px';
+      } else if (item.content.length > 100) {
+        topMargin = '20px';
+      } else {
+        topMargin = '100px';
+      }
     }
-    if (item.content.length < 100) {
-      // Example condition, adjust based on your requirements
-      topMargin = '100px';
-    }
+
     return {
       'margin-top': topMargin,
-      'margin-bottom': '10px', // Adjust as needed
+      'margin-bottom': '10px',
     };
   }
 
@@ -150,7 +167,8 @@ export class TutorialScreenComponent implements AfterViewInit {
 
   formatContent(content: string): SafeHtml {
     if (!content) return '';
-    const formattedContent = content.replace(/\[\[(.*?)\]\]/g, '<span class="custom-highlight">$1</span>');
+
+    let formattedContent = content.replace(/\*\*(.*?)\*\*/g, '<span class="red-highlight">$1</span>');
     return this.sanitizer.bypassSecurityTrustHtml(formattedContent);
   }
 }

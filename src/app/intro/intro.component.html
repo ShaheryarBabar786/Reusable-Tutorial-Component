@@ -9,7 +9,7 @@
   </div>
 
   <div class="demo-component">
-    <lib-primary-btn class="button" (click)="startTutorial()">
+    <lib-primary-btn class="button" (click)="startTutorial(); saveUpdatedContent()">
       {{ 'APP.START_TUTORIAL' | translate }}
     </lib-primary-btn>
   </div>
@@ -21,8 +21,8 @@
   </div>
 
   <div class="input-list">
-    <div *ngFor="let item of testInputs">
-      <input type="text" class="input-field" [placeholder]="item" />
+    <div *ngFor="let item of testInputs; let i = index">
+      <input type="text" class="input-field" [value]="item" (input)="updateInputValue(i, $event)" />
     </div>
   </div>
 </div>
