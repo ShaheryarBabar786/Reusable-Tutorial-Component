@@ -5,8 +5,11 @@
 
       <div class="content-area">
         <!-- Left Side: Dynamic Content -->
-        <div class="content-box" *ngIf="selectedItem">
+        <!-- <div class="content-box" *ngIf="selectedItem">
           <p #contentBox [innerHTML]="formatContent(selectedItem.content)"></p>
+        </div> -->
+        <div class="content-box" *ngIf="selectedItem">
+          <p #contentBox [innerHTML]="formatContent(selectedItem.content)" [ngStyle]="setContentMargins(selectedItem)"></p>
         </div>
 
         <!-- Right Side: Navigation Buttons -->
@@ -24,4 +27,18 @@
       </div>
     </div>
   </div>
+
+  <lib-popup
+    *ngIf="toggleModal"
+    [isOpen]="toggleModal"
+    [confirmButton]="'POPUP.CONFIRM'"
+    [cancelButton]="'POPUP.CANCEL'"
+    [title]="'POPUP.WARNING'"
+    [message]="'POPUP.WARNING_MESSAGE'"
+    [progBarCurrentStep]="3"
+    [progBarTotalSteps]="5"
+    [extendedMessage]="'POPUP.WARNING_MESSAGE_EXTENDED'"
+    (close)="closeModal()"
+  >
+  </lib-popup>
 </div>

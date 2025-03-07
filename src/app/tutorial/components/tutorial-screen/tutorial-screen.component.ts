@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import LeaderLine from 'leader-line-new';
 import { TutorialScreen } from '../../components/tutorial-screen/tutorial-screen.types';
@@ -15,15 +16,18 @@ export class TutorialScreenComponent implements AfterViewInit {
   tutorialItems: TutorialScreen[] = [];
   selectedItem: TutorialScreen | null = null;
   leaderLine: LeaderLine | null = null;
+  toggleModal: boolean = false;
 
   @ViewChild('contentBox', { static: false }) contentBox!: ElementRef;
   @ViewChildren('button') buttons!: QueryList<ElementRef>;
 
   constructor(
     @Inject(DomSanitizer) private sanitizer: DomSanitizer,
+    private router: Router,
     private tutorialService: TutorialService,
     private cdr: ChangeDetectorRef,
     private translateService: TranslateService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +39,14 @@ export class TutorialScreenComponent implements AfterViewInit {
     });
 
     this.loadTutorialScreens();
+
+    this.route.queryParams.subscribe((params) => {
+      console.log('Query Params:', params); // 🔍 Debugging Log
+      if (params['openModal'] === 'true') {
+        this.toggleModal = true; // 🔥 Set modal to open
+        console.log('Modal should open:', this.toggleModal); // 🔍 Debugging Log
+      }
+    });
   }
 
   loadTutorialScreens(): void {
@@ -44,6 +56,10 @@ export class TutorialScreenComponent implements AfterViewInit {
       this.cdr.detectChanges();
       setTimeout(() => this.drawArrow(), 500);
     });
+  }
+
+  closeModal() {
+    this.toggleModal = false;
   }
 
   ngAfterViewInit(): void {
@@ -60,6 +76,23 @@ export class TutorialScreenComponent implements AfterViewInit {
     this.selectedItem = item;
     this.cdr.detectChanges();
     setTimeout(() => this.drawArrow(), 500);
+  }
+
+  setContentMargins(item: any) {
+    // Example: If the content length exceeds a certain threshold, add more margin to the top
+    let topMargin = '20px'; // Default margin
+    if (item.content.length > 100) {
+      // Example condition, adjust based on your requirements
+      topMargin = '0px';
+    }
+    if (item.content.length < 100) {
+      // Example condition, adjust based on your requirements
+      topMargin = '100px';
+    }
+    return {
+      'margin-top': topMargin,
+      'margin-bottom': '10px', // Adjust as needed
+    };
   }
 
   drawArrow(): void {
@@ -101,7 +134,7 @@ export class TutorialScreenComponent implements AfterViewInit {
   }
 
   closeTutorial(): void {
-    console.log('Tutorial closed');
+    this.router.navigate(['/']);
   }
 
   sanitize(svgString: string): SafeHtml {

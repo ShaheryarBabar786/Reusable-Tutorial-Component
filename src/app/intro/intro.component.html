@@ -1,5 +1,4 @@
 <div class="intro-container">
-  <!-- Language Dropdown at the Top-Right Corner -->
   <div class="dropdown-container">
     <label for="languageSelect" class="language-label">{{ 'APP.LANGUAGE' | translate }} :</label>
     <select id="languageSelect" (change)="onLanguageChange($event)">
@@ -9,7 +8,6 @@
     </select>
   </div>
 
-  <!-- Buttons using translations -->
   <div class="demo-component">
     <lib-primary-btn class="button" (click)="startTutorial()">
       {{ 'APP.START_TUTORIAL' | translate }}
@@ -17,7 +15,7 @@
   </div>
 
   <div class="demo-component">
-    <lib-primary-btn class="button">
+    <lib-primary-btn class="button" (click)="openTutorialWithModal()">
       {{ 'APP.LOREM' | translate }}
     </lib-primary-btn>
   </div>

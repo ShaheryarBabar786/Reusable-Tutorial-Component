@@ -41,6 +41,9 @@ export class IntroComponent {
   startTutorial() {
     this.router.navigate(['/tutorial']);
   }
+  openTutorialWithModal() {
+    this.router.navigate(['/tutorial'], { queryParams: { openModal: true } });
+  }
 
   onLanguageChange(event: Event) {
     this.selectedLanguage = (event.target as HTMLSelectElement).value;
