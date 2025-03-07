@@ -5,6 +5,7 @@
   justify-content: center;
   color: white;
   padding: 20px;
+  overflow: hidden;
 }
 lib-menu-btn .menu-item {
   color: white !important;
