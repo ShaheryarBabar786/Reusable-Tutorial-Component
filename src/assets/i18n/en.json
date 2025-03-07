@@ -1,9 +1,15 @@
 {
   "APP": {
-    "DEMO_COMPONENT": "Demo Component",
-    "TRIGGER_SUCCESS": "Trigger Success",
-    "TRIGGER_WARN": "Trigger Warn",
-    "TRIGGER_ERROR": "Trigger Error",
-    "TRIGGER_INFO": "Trigger Info"
+    "LANGUAGE": "Language",
+    "START_TUTORIAL": "Start Tutorial",
+    "LOREM": "Lorem Ipsum"
+  },
+  "TEST_INPUTS": {
+    "WORK_UPDATE_1": "Work update 1",
+    "LOREM": "Lorem ipsum dolor sit amet",
+    "WORK_UPDATE_2": "Work update 2",
+    "ANOTHER_PLACEHOLDER": "Another placeholder text",
+    "WORK_UPDATE_3": "Work update 3",
+    "MORE_TESTING": "More testing input fields"
   }
 }

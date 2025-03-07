@@ -1,9 +1,15 @@
 {
   "APP": {
-    "DEMO_COMPONENT": "Composant de démonstration",
-    "TRIGGER_SUCCESS": "Déclencher Succès",
-    "TRIGGER_WARN": "Déclencher Avertissement",
-    "TRIGGER_ERROR": "Déclencher Erreur",
-    "TRIGGER_INFO": "Déclencher Information"
+    "LANGUAGE": "Langue",
+    "START_TUTORIAL": "Démarrer le tutoriel",
+    "LOREM": "Lorem Ipsum"
+  },
+  "TEST_INPUTS": {
+    "WORK_UPDATE_1": "Mise à jour du travail 1",
+    "LOREM": "Lorem ipsum dolor sit amet",
+    "WORK_UPDATE_2": "Mise à jour du travail 2",
+    "ANOTHER_PLACEHOLDER": "Un autre texte de remplacement",
+    "WORK_UPDATE_3": "Mise à jour du travail 3",
+    "MORE_TESTING": "Plus de tests de champs de saisie"
   }
 }
