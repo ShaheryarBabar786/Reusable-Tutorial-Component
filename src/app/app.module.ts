@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ButtonsModule, LibModalModule } from 'nextsapien-component-lib';
+import { ButtonsModule, LibAutoDelegationModalComponent, LibModalModule } from 'nextsapien-component-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
@@ -31,9 +31,10 @@ export const httpLoaderFactory = (http: HttpBackend): TranslateHttpLoader => new
       },
     }),
     AppRoutingModule,
-    TutorialModule, // ✅ Add this line
+    TutorialModule, // ✅ Add this line,
+    LibAutoDelegationModalComponent,
   ],
-  providers: [],
+  providers: [LibAutoDelegationModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

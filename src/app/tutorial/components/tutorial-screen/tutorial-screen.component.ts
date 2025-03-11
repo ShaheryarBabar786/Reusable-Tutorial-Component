@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import LeaderLine from 'leader-line-new';
 import { TutorialScreen } from '../../components/tutorial-screen/tutorial-screen.types';
+import { ModalService } from '../../services/modal.service';
 import { TutorialService } from '../../services/tutorial.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class TutorialScreenComponent implements AfterViewInit {
 
   @ViewChild('contentBox', { static: false }) contentBox!: ElementRef;
   @ViewChildren('button') buttons!: QueryList<ElementRef>;
+  isOpenContent: any;
 
   constructor(
     @Inject(DomSanitizer) private sanitizer: DomSanitizer,
@@ -28,17 +30,14 @@ export class TutorialScreenComponent implements AfterViewInit {
     private cdr: ChangeDetectorRef,
     private translateService: TranslateService,
     private route: ActivatedRoute,
+    private modalService: ModalService, // Inject the ModalService
   ) {}
 
   ngOnInit(): void {
     const storedLang = localStorage.getItem('selectedLanguage') || 'en';
     this.translateService.use(storedLang);
-    this.route.queryParams.subscribe((params) => {
-      console.log('Query Params:', params); // Debugging
-      if (params['openModal'] === 'true') {
-        console.log('Opening Modal'); // Debugging
-        this.toggleModal = true;
-      }
+    this.modalService.modalState$.subscribe((isOpen) => {
+      this.toggleModal = isOpen;
     });
 
     this.translateService.onLangChange.subscribe(() => {
@@ -46,12 +45,6 @@ export class TutorialScreenComponent implements AfterViewInit {
     });
 
     this.loadTutorialScreens();
-
-    this.route.queryParams.subscribe((params) => {
-      if (params['openModal'] === 'true') {
-        this.toggleModal = true; // 🔥 Set modal to open
-      }
-    });
   }
 
   loadTutorialScreens(): void {
@@ -61,10 +54,6 @@ export class TutorialScreenComponent implements AfterViewInit {
       this.cdr.detectChanges();
       setTimeout(() => this.drawArrow(), 500);
     });
-  }
-
-  closeModal() {
-    this.toggleModal = false;
   }
 
   ngAfterViewInit(): void {
@@ -89,11 +78,11 @@ export class TutorialScreenComponent implements AfterViewInit {
     if (window.innerWidth <= 768) {
       // Mobile View
       if (item.content.length > 150) {
-        topMargin = '5px'; // Less margin for long content
+        topMargin = '5px';
       } else if (item.content.length > 100) {
-        topMargin = '15px'; // Medium-length content
+        topMargin = '15px';
       } else {
-        topMargin = '40px'; // More margin for short content
+        topMargin = '40px';
       }
     } else {
       // Desktop View
@@ -143,7 +132,6 @@ export class TutorialScreenComponent implements AfterViewInit {
       endSocket: 'left',
     });
 
-    // 🔥 Animate the line smoothly
     const leaderLineElement = document.querySelector('.leader-line') as HTMLElement;
     if (leaderLineElement) {
       leaderLineElement.style.zIndex = '9999';

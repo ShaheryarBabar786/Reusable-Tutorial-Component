@@ -14,8 +14,8 @@
     </lib-primary-btn>
   </div>
 
-  <div class="demo-component">
-    <lib-primary-btn class="button" (click)="openTutorialWithModal()">
+  <div class="demo-component" (click)="openTutorialWithModal()">
+    <lib-primary-btn class="button">
       {{ 'APP.LOREM' | translate }}
     </lib-primary-btn>
   </div>
@@ -23,6 +23,11 @@
   <div class="input-list">
     <div *ngFor="let item of testInputs; let i = index">
       <input type="text" class="input-field" [value]="item" (input)="updateInputValue(i, $event)" />
+    </div>
+  </div>
+  <div *ngIf="showModal" class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <lib-auto-delegation-modal [data]="modalDataDateRequest" [expandedBaseCard]="true" (event)="onEvent($event)"> </lib-auto-delegation-modal>
     </div>
   </div>
 </div>

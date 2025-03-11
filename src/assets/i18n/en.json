@@ -11,5 +11,12 @@
     "ANOTHER_PLACEHOLDER": "Another placeholder text",
     "WORK_UPDATE_3": "Work update 3",
     "MORE_TESTING": "More testing input fields"
+  },
+  "POPUP": {
+    "WARNING": "Warning",
+    "WARNING_MESSAGE": "This is a warning message.",
+    "WARNING_MESSAGE_EXTENDED": "This is an extended warning message.",
+    "CONFIRM": "Confirm",
+    "CANCEL": "Cancel"
   }
 }

@@ -4,18 +4,14 @@
       <lib-icon-btn class="close-btn" (click)="closeTutorial()"> &#10005; </lib-icon-btn>
 
       <div class="content-area">
-        <!-- Left Side: Dynamic Content -->
-        <!-- <div class="content-box" *ngIf="selectedItem">
-          <p #contentBox [innerHTML]="formatContent(selectedItem.content)"></p>
-        </div> -->
+        <!-- Content Box (Hidden when modal is open) -->
         <div class="content-box" *ngIf="selectedItem">
           <p #contentBox [innerHTML]="formatContent(selectedItem.content)" [ngStyle]="setContentMargins(selectedItem)"></p>
         </div>
 
-        <!-- Right Side: Navigation Buttons -->
+        <!-- Buttons Container (Always Visible) -->
         <div class="buttons-container">
           <div class="button-wrapper" *ngFor="let item of tutorialItems; let i = index">
-            <!-- Wrap lib-icon-btn with a native element and add #button reference -->
             <div #button>
               <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
                 <span [innerHTML]="sanitize(item.icon)"></span>
@@ -27,18 +23,11 @@
       </div>
     </div>
   </div>
+</div>
 
-  <lib-popup
-    *ngIf="toggleModal"
-    [isOpen]="toggleModal"
-    [confirmButton]="'POPUP.CONFIRM'"
-    [cancelButton]="'POPUP.CANCEL'"
-    [title]="'POPUP.WARNING'"
-    [message]="'POPUP.WARNING_MESSAGE'"
-    [progBarCurrentStep]="3"
-    [progBarTotalSteps]="5"
-    [extendedMessage]="'POPUP.WARNING_MESSAGE_EXTENDED'"
-    (close)="closeModal()"
-  >
-  </lib-popup>
+<!-- Modal Overlay -->
+<div *ngIf="toggleModal" class="modal-overlay" (click)="modalService.closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <lib-auto-delegation-modal [data]="modalDataDateRequest" [expandedBaseCard]="true" (event)="onEvent($event)"> </lib-auto-delegation-modal>
+  </div>
 </div>
