@@ -14,13 +14,13 @@ import { TutorialService } from '../../services/tutorial.service';
   standalone: false,
 })
 export class TutorialScreenComponent implements AfterViewInit {
-  tutorialItems: TutorialScreen[] = [];
-  selectedItem: TutorialScreen | null = null;
-  leaderLine: LeaderLine | null = null;
-  toggleModal: boolean = false;
+  tutorialItems: TutorialScreen[] = []; // Stores the list of tutorial screens
+  selectedItem: TutorialScreen | null = null; // Currently selected tutorial screen
+  leaderLine: LeaderLine | null = null; // Stores the LeaderLine instance
+  toggleModal: boolean = false; // Controls the modal state
 
-  @ViewChild('contentBox', { static: false }) contentBox!: ElementRef;
-  @ViewChildren('button') buttons!: QueryList<ElementRef>;
+  @ViewChild('contentBox', { static: false }) contentBox!: ElementRef; // Reference to the content box element
+  @ViewChildren('button') buttons!: QueryList<ElementRef>; // References to all tutorial buttons
   isOpenContent: any;
 
   constructor(
@@ -30,16 +30,19 @@ export class TutorialScreenComponent implements AfterViewInit {
     private cdr: ChangeDetectorRef,
     private translateService: TranslateService,
     private route: ActivatedRoute,
-    private modalService: ModalService, // Inject the ModalService
+    private modalService: ModalService,
   ) {}
 
   ngOnInit(): void {
     const storedLang = localStorage.getItem('selectedLanguage') || 'en';
     this.translateService.use(storedLang);
+
+    // Listen for modal state changes
     this.modalService.modalState$.subscribe((isOpen) => {
       this.toggleModal = isOpen;
     });
 
+    // Reload tutorial screens on language change
     this.translateService.onLangChange.subscribe(() => {
       this.loadTutorialScreens();
     });
@@ -47,36 +50,43 @@ export class TutorialScreenComponent implements AfterViewInit {
     this.loadTutorialScreens();
   }
 
+  // Fetch tutorial screens from the service
   loadTutorialScreens(): void {
     this.tutorialService.getTutorialScreens().subscribe((data) => {
       this.tutorialItems = data;
       this.selectedItem = this.tutorialItems[0];
-      this.cdr.detectChanges();
-      setTimeout(() => this.drawArrow(), 500);
+      this.cdr.detectChanges(); // Detect changes to update view
+      setTimeout(() => this.drawArrow(), 500); // Draw arrow after view updates
     });
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.drawArrow(), 500);
+    setTimeout(() => this.drawArrow(), 500); // Ensure arrow is drawn after view initialization
   }
 
   ngAfterViewChecked(): void {
     if (this.selectedItem && !this.leaderLine) {
-      this.drawArrow();
+      this.drawArrow(); // Redraw the arrow if missing
     }
   }
 
+  // Selects a tutorial screen and redraws the arrow
   selectItem(item: TutorialScreen): void {
-    this.selectedItem = item;
-    this.cdr.detectChanges();
-    setTimeout(() => this.drawArrow(), 500);
+    if (item.id === '5') {
+      // Use the unique ID for the "Chat" button
+      this.router.navigate(['/chat']); // Navigate to the /chat route
+    } else {
+      this.selectedItem = item;
+      this.cdr.detectChanges();
+      setTimeout(() => this.drawArrow(), 500);
+    }
   }
 
+  // Dynamically sets content margins based on screen width and content length
   setContentMargins(item: any) {
     let topMargin = '20px';
 
     if (window.innerWidth <= 768) {
-      // Mobile View
       if (item.content.length > 150) {
         topMargin = '5px';
       } else if (item.content.length > 100) {
@@ -85,7 +95,6 @@ export class TutorialScreenComponent implements AfterViewInit {
         topMargin = '40px';
       }
     } else {
-      // Desktop View
       if (item.content.length > 150) {
         topMargin = '0px';
       } else if (item.content.length > 100) {
@@ -101,6 +110,7 @@ export class TutorialScreenComponent implements AfterViewInit {
     };
   }
 
+  // Draws a guiding arrow between the content box and the selected button
   drawArrow(): void {
     const contentElement = this.contentBox?.nativeElement;
     const buttonIndex = this.tutorialItems.indexOf(this.selectedItem!);
@@ -116,11 +126,12 @@ export class TutorialScreenComponent implements AfterViewInit {
       return;
     }
 
+    // Remove existing arrow if present
     if (this.leaderLine) {
       this.leaderLine.remove();
     }
 
-    // 🔥 Create new LeaderLine
+    // Create new LeaderLine
     this.leaderLine = new LeaderLine(contentElement, buttonElement, {
       path: 'fluid',
       startPlug: 'square',
@@ -132,20 +143,24 @@ export class TutorialScreenComponent implements AfterViewInit {
       endSocket: 'left',
     });
 
+    // Ensure the arrow appears on top of other elements
     const leaderLineElement = document.querySelector('.leader-line') as HTMLElement;
     if (leaderLineElement) {
       leaderLineElement.style.zIndex = '9999';
     }
   }
 
+  // Closes the tutorial and navigates to the home screen
   closeTutorial(): void {
     this.router.navigate(['/']);
   }
 
+  // Sanitizes an SVG string to be safely used in the template
   sanitize(svgString: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(svgString);
   }
 
+  // Formats labels by breaking them into two lines if they are too long
   formatLabel(label: string): string {
     if (label.length > 14) {
       return label.slice(0, 14) + '<br>' + label.slice(14);
@@ -153,9 +168,9 @@ export class TutorialScreenComponent implements AfterViewInit {
     return label;
   }
 
+  // Formats tutorial content by highlighting bold text
   formatContent(content: string): SafeHtml {
     if (!content) return '';
-
     let formattedContent = content.replace(/\*\*(.*?)\*\*/g, '<span class="red-highlight">$1</span>');
     return this.sanitizer.bypassSecurityTrustHtml(formattedContent);
   }

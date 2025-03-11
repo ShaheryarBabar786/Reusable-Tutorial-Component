@@ -9,7 +9,7 @@ import { ButtonsModule, LibAutoDelegationModalComponent, LibModalModule } from '
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
-import { TutorialModule } from './tutorial/tutorial.module'; // ✅ Import the TutorialModule
+import { TutorialModule } from './tutorial/tutorial.module';
 
 export const httpLoaderFactory = (http: HttpBackend): TranslateHttpLoader => new TranslateHttpLoader(new HttpClient(http), './assets/i18n/', '.json');
 

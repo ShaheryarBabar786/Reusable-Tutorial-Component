@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { Language } from '../language.enum'; // Import the Language enum
 import { TutorialScreen } from '../models/tutorial.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TutorialService {
-  private selectedLanguage = new BehaviorSubject<string>('en');
+  private selectedLanguage = new BehaviorSubject<Language>(Language.English); // Use the Language enum
   private tutorialScreens = new BehaviorSubject<TutorialScreen[]>([]);
 
   constructor(private http: HttpClient) {}
@@ -23,7 +24,8 @@ export class TutorialService {
     );
   }
 
-  setLanguage(lang: string): void {
+  setLanguage(lang: Language): void {
+    // Use the Language enum
     this.selectedLanguage.next(lang);
   }
 
@@ -31,7 +33,8 @@ export class TutorialService {
     return this.tutorialScreens.asObservable();
   }
 
-  saveTutorialData(lang: string, updatedData: TutorialScreen[]): void {
+  saveTutorialData(lang: Language, updatedData: TutorialScreen[]): void {
+    // Use the Language enum
     const savePath = `assets/data/tutorial-data.${lang}.json`;
     this.http.post(savePath, updatedData).subscribe(
       () => console.log(`Updated ${lang} tutorial data saved successfully.`),
