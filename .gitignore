@@ -3,6 +3,9 @@
 /Frontend/dist/
 /Frontend/.angular/cache/
 /Frontend/.vercel
+/Frontend/.history/
+
+
 
 # === BACKEND IGNORE ===
 /Mock-Backend/node_modules/
@@ -13,7 +16,7 @@
 /Mock-Backend/.nyc_output/
 /Mock-Backend/.temp/
 /Mock-Backend/.tmp/
-
+/Mock-Backend/.history/
 /Mock-Backend/pids
 /Mock-Backend/*.pid
 /Mock-Backend/*.seed
