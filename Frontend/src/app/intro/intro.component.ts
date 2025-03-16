@@ -90,19 +90,6 @@ export class IntroComponent {
     this.loadTutorialContent();
   }
 
-  // Fetch tutorial content from the service
-  // Fetch tutorial content from the service
-  // loadTutorialContent() {
-  //   this.tutorialService.getTutorialScreens().subscribe((data) => {
-  //     this.tutorialItems = data;
-
-  //     // Sort items by ID before extracting content
-  //     this.testInputs = this.tutorialItems
-  //       .sort((a, b) => Number(a.id) - Number(b.id)) // Ensure correct order
-  //       .map((item) => item.content); // Extract only content
-  //   });
-  // }
-
   loadTutorialContent() {
     this.tutorialService.getTutorialScreens().subscribe((data) => {
       this.tutorialItems = data;
@@ -115,8 +102,6 @@ export class IntroComponent {
 
       // Sort items by ID and extract content
       this.testInputs = this.tutorialItems.sort((a, b) => Number(a.id) - Number(b.id)).map((item) => item.content);
-
-      console.log('Loaded testInputs:', this.testInputs); // Debugging line
     });
   }
 
@@ -137,7 +122,6 @@ export class IntroComponent {
         item.content = this.testInputs[index];
       }
     });
-    console.log('Updated tutorial content:', this.tutorialItems);
     this.tutorialService.saveTutorialData(this.selectedLanguage, this.tutorialItems);
   }
 
@@ -167,10 +151,7 @@ export class IntroComponent {
   }
 
   // Handle modal event response
-  onEvent(autoDelegationEvent: ModalData): void {
-    console.log('Auto Delegation event: ', autoDelegationEvent);
-  }
-
+  onEvent(autoDelegationEvent: ModalData): void {}
   // Cleanup on component destruction to prevent memory leaks
   ngOnDestroy(): void {
     this.componentDestroyed$.next();

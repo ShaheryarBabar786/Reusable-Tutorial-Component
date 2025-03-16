@@ -6,7 +6,7 @@
       <div class="content-area">
         <!-- Content Box (Hidden when modal is open) -->
         <div class="content-box" *ngIf="selectedItem">
-          <p #contentBox [innerHTML]="formatContent(selectedItem.content)" [ngStyle]="setContentMargins(selectedItem)"></p>
+          <p #contentBox [innerHTML]="formatContent(selectedItem.content)" [ngClass]="getContentClass(selectedItem)"></p>
         </div>
 
         <!-- Buttons Container (Always Visible) -->

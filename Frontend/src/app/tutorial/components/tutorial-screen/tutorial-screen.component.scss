@@ -62,15 +62,17 @@
 
 /* Paragraph styling */
 p {
-  font-family: 'Gilroy-Regular', sans-serif;
+  // font-family: 'Gilroy-Regular', sans-serif;
+  font-family: 'Gilroy';
   font-weight: 400;
-  font-size: 22px;
+  font-size: 18.41px;
+  font-style: normal;
+
   // line-height: 1.6;
   line-height: 160%;
   color: #ffffff;
-  // text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-  text-shadow: 0px 0px 8.54809px #ffffff;
-  margin-bottom: 15px;
+  // text-shadow: 0px 0px 8.54809px #ffffff;
+  text-shadow: 0px 0px 5.7435px #ffffff;
 }
 .custom-highlight {
   font-family: 'Gilroy-SemiBold', sans-serif;
@@ -268,6 +270,80 @@ lib-icon-btn span svg {
   }
 }
 
+.content-1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.content-2,
+.content-3,
+.content-4,
+.content-5,
+.content-6,
+.content-9 {
+  position: relative;
+}
+
+.content-7 {
+  position: relative;
+}
+
+.content-8 {
+  position: relative;
+}
+
+.content-10 {
+  position: relative;
+}
+
+.content-11 {
+  position: relative;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  position: relative;
+}
+@media (max-width: 768px) {
+  .content-2,
+  .content-3,
+  .content-4,
+  .content-5,
+  .content-6,
+  .content-9 {
+    top: 150px;
+  }
+
+  .content-7 {
+    top: 120px;
+  }
+
+  .content-8 {
+    top: 270px;
+  }
+
+  .content-10 {
+    top: 30px;
+  }
+
+  .content-11 {
+    top: 80px;
+  }
+}
+
 /* Mobile-specific styles */
 @media (max-width: 600px) {
   .container {
@@ -312,21 +388,28 @@ lib-icon-btn span svg {
   .content-area p {
     margin-top: 70px !important;
   }
-}
+  .content-2,
+  .content-3,
+  .content-4,
+  .content-5,
+  .content-6,
+  .content-9 {
+    top: 150px;
+  }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
+  .content-7 {
+    top: 120px;
+  }
 
-.modal-content {
-  position: relative;
+  .content-8 {
+    top: 270px;
+  }
+
+  .content-10 {
+    top: 30px;
+  }
+
+  .content-11 {
+    top: 80px;
+  }
 }

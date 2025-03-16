@@ -9,7 +9,6 @@ export class TutorialController {
   @Get(':lang')
   getTutorialData(@Param('lang') lang: string) {
     const filePath = join(this.dataPath, `tutorial-data.${lang}.json`);
-    console.log('Reading file from:', filePath); // Debugging
     const data = readFileSync(filePath, 'utf8');
     return JSON.parse(data);
   }
