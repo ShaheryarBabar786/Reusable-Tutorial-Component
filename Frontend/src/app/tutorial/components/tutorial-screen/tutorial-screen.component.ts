@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
   selectedItem: TutorialScreen | null = null; // Currently selected tutorial screen
   leaderLine: LeaderLine | null = null; // Stores the LeaderLine instance
   toggleModal: boolean = false; // Controls the modal state
+  selectedIndex: number = 0; // Track the selected index for mobile
 
   @ViewChild('contentBox', { static: false }) contentBox!: ElementRef; // Reference to the content box element
   @ViewChildren('button') buttons!: QueryList<ElementRef>; // References to all tutorial buttons
@@ -66,12 +67,18 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
       this.cdr.detectChanges(); // Trigger change detection
     });
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    // Trigger change detection to update the view
+    this.cdr.detectChanges();
+  }
 
   // Fetch tutorial screens from the service
   loadTutorialScreens(): void {
     this.tutorialService.getTutorialScreens().subscribe((data) => {
       this.tutorialItems = data;
-      this.selectedItem = this.tutorialItems[0];
+      this.selectedItem = this.tutorialItems[0]; // Set the first item as selected
+      this.selectedIndex = 0; // Set the selected index to 0
       this.cdr.detectChanges(); // Detect changes to update view
       setTimeout(() => this.drawArrow(), 500); // Draw arrow after view updates
     });
@@ -79,6 +86,9 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
 
   getContentClass(item: any): string {
     return this.contentClasses[item.id] || '';
+  }
+  isMobile(): boolean {
+    return window.innerWidth <= 768;
   }
 
   ngAfterViewInit(): void {
@@ -99,12 +109,13 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
   }
 
   // Selects a tutorial screen and redraws the arrow
-  selectItem(item: TutorialScreen): void {
+  selectItem(item: TutorialScreen, index: number): void {
     if (item.id === '5') {
       // Use the unique ID for the "Chat" button
       this.router.navigate(['/chat']); // Navigate to the /chat route
     } else {
       this.selectedItem = item;
+      this.selectedIndex = index; // Update the selected index for mobile
       this.cdr.detectChanges();
       setTimeout(() => this.drawArrow(), 500);
     }
@@ -203,6 +214,7 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
       startSocket: arrowDesign.startSocket || 'bottom',
       endSocket: arrowDesign.endSocket || 'left',
     });
+
 
     // Ensure the arrow appears on top of other elements
     const leaderLineElement = document.querySelector('.leader-line') as HTMLElement;

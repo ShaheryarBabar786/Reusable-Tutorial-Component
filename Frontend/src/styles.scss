@@ -65,3 +65,13 @@ body {
   justify-content: center;
   background-color: #27242c !important;
 }
+html, body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  width: 100%; /* Ensure full width */
+  max-width: 100%; /* Prevent content from exceeding viewport width */
+}
+
+.container {
+  width: 100vw; /* Full viewport width */
+  overflow: hidden; /* Hide overflow */
+}

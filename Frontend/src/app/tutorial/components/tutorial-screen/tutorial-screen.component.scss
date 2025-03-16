@@ -10,9 +10,17 @@
 }
 
 /* Tutorial wrapper scaling */
+// .tutorial-wrapper {
+//   transform: scale(calc(min(100vw, 100vh) / 800));
+//   transform-origin: center;
+// }
 .tutorial-wrapper {
   transform: scale(calc(min(100vw, 100vh) / 800));
   transform-origin: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Adjust as needed */
 }
 
 /* Tutorial container styling */
@@ -411,5 +419,8 @@ lib-icon-btn span svg {
 
   .content-11 {
     top: 80px;
+  }
+  .tutorial-container{
+    overflow-x: hidden;
   }
 }

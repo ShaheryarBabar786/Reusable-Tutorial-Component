@@ -1,19 +1,21 @@
 <div class="container">
   <div class="tutorial-wrapper">
-    <div class="tutorial-container">
+    <!-- Single container for all screens -->
+    <div class="tutorial-container"
+         *ngFor="let item of (isMobile() ? [tutorialItems[selectedIndex]] : tutorialItems | slice:0:3); let i = index">
       <lib-icon-btn class="close-btn" (click)="closeTutorial()"> &#10005; </lib-icon-btn>
 
       <div class="content-area">
-        <!-- Content Box (Hidden when modal is open) -->
+        <!-- Content Box -->
         <div class="content-box" *ngIf="selectedItem">
           <p #contentBox [innerHTML]="formatContent(selectedItem.content)" [ngClass]="getContentClass(selectedItem)"></p>
         </div>
 
-        <!-- Buttons Container (Always Visible) -->
+        <!-- Buttons Container -->
         <div class="buttons-container">
           <div class="button-wrapper" *ngFor="let item of tutorialItems; let i = index">
             <div #button>
-              <lib-icon-btn (click)="selectItem(item)" [class.active]="selectedItem === item">
+              <lib-icon-btn (click)="selectItem(item, i)" [class.active]="selectedItem === item">
                 <span [innerHTML]="sanitize(item.icon)"></span>
               </lib-icon-btn>
             </div>
@@ -24,7 +26,6 @@
     </div>
   </div>
 </div>
-
 <!-- Modal Overlay -->
 <div *ngIf="toggleModal" class="modal-overlay" (click)="modalService.closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
