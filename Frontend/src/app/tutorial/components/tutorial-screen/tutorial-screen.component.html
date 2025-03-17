@@ -7,19 +7,19 @@
 
       <div class="content-area">
         <!-- Content Box -->
-        <div class="content-box" *ngIf="selectedItem">
-          <p #contentBox [innerHTML]="formatContent(selectedItem.content)" [ngClass]="getContentClass(selectedItem)"></p>
+        <div class="content-box" *ngIf="item">
+          <p #contentBox [innerHTML]="formatContent(item.content)" [ngClass]="getContentClass(item)"></p>
         </div>
 
         <!-- Buttons Container -->
         <div class="buttons-container">
-          <div class="button-wrapper" *ngFor="let item of tutorialItems; let i = index">
+          <div class="button-wrapper" *ngFor="let btn of tutorialItems; let j = index">
             <div #button>
-              <lib-icon-btn (click)="selectItem(item, i)" [class.active]="selectedItem === item">
-                <span [innerHTML]="sanitize(item.icon)"></span>
+              <lib-icon-btn (click)="selectItem(btn, j, i)" [class.active]="item === btn">
+                <span [innerHTML]="sanitize(btn.icon)"></span>
               </lib-icon-btn>
             </div>
-            <span class="button-label" [innerHTML]="formatLabel(item.label)"></span>
+            <span class="button-label" [innerHTML]="formatLabel(btn.label)"></span>
           </div>
         </div>
       </div>
