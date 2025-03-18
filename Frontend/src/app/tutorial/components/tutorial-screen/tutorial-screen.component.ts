@@ -110,6 +110,9 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
       this.router.navigate(['/chat']);
     } else {
       this.selectedItems[containerIndex] = item;
+      if (this.isMobile()) {
+        this.selectedIndex = buttonIndex;
+      }
       this.cdr.detectChanges();
       this.drawArrows();
     }

@@ -9,23 +9,19 @@
   left: 0;
 }
 
-/* Tutorial wrapper scaling */
-// .tutorial-wrapper {
-//   transform: scale(calc(min(100vw, 100vh) / 800));
-//   transform-origin: center;
-// }
 .tutorial-wrapper {
-  transform: scale(calc(min(100vw, 100vh) / 800));
+  transform: scale(calc(min(100vw, 100vh) / 1000)); /* Adjusted scaling */
   transform-origin: center;
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 1200px; /* Adjust as needed */
+  gap: 20px; /* Added gap for spacing between containers */
 }
 
-/* Tutorial container styling */
 .tutorial-container {
-  width: clamp(300px, 30vw, 600px);
+  width: clamp(250px, 25vw, 500px); /* Adjusted width */
+  height: clamp(470px, 50vh, 600px); /* Adjusted height */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -35,7 +31,11 @@
   box-sizing: border-box;
   z-index: 10;
   position: relative;
+  margin: 10px; /* Added margin for spacing */
+  border-radius:15px;
 }
+
+/* Rest of your CSS remains unchanged */
 
 /* Close button styling */
 .close-btn {
@@ -108,7 +108,6 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 /* Specific button wrapper adjustments */
@@ -126,8 +125,8 @@ p {
 }
 
 .button-wrapper:nth-child(7) lib-icon-btn {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   position: relative;
   right: 10px;
 }
@@ -157,20 +156,20 @@ p {
 
 .button-wrapper:nth-child(9) {
   position: absolute;
-  top: 370px;
+  top: 275px;
   right: 60px;
 }
 
 .button-wrapper:nth-child(10) {
   position: absolute;
-  top: 420px;
+  top: 320px;
   right: 90px;
 }
 
 .button-wrapper:nth-child(11) {
   position: absolute;
-  top: 470px;
-  right: 65px;
+  top: 360px;
+  right: 70px;
 }
 
 /* Button label styling */
@@ -190,8 +189,8 @@ lib-icon-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: radial-gradient(52.89% 52.89% at 38.63% 62.91%, rgba(247, 247, 247, 0) 78.64%, rgba(255, 255, 255, 0.52) 88.75%, rgba(247, 247, 247, 0) 100%);
   box-shadow: -3px -2px 10px rgba(255, 255, 255, 0.2);
@@ -280,7 +279,6 @@ lib-icon-btn span svg {
 
 .content-1 {
   margin-top: 20px;
-  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -384,6 +382,36 @@ lib-icon-btn span svg {
     margin: 0;
     padding: 10px;
   }
+  lib-icon-btn{
+    width: 40px;
+    height: 40px;
+  }
+  .button-wrapper:nth-child(7) lib-icon-btn {
+    width: 55px;
+    height: 55px;
+
+  }
+  .button-wrapper{
+    margin-bottom: 10px;
+  }
+  .button-wrapper:nth-child(9) {
+
+    top: 370px;
+    right: 60px;
+  }
+
+  .button-wrapper:nth-child(10) {
+
+    top: 420px;
+    right: 90px;
+  }
+
+  .button-wrapper:nth-child(11) {
+
+    top: 470px;
+    right: 65px;
+  }
+
 
   /* Hide other elements on mobile */
   .container > *:not(.tutorial-wrapper) {

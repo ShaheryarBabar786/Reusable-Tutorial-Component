@@ -2,7 +2,7 @@
   <div class="tutorial-wrapper">
     <!-- Single container for all screens -->
     <div class="tutorial-container"
-         *ngFor="let item of (isMobile() ? [tutorialItems[selectedIndex]] : tutorialItems | slice:0:3); let i = index">
+         *ngFor="let item of (isMobile() ? [tutorialItems[selectedIndex]] : selectedItems); let i = index">
       <lib-icon-btn class="close-btn" (click)="closeTutorial()"> &#10005; </lib-icon-btn>
 
       <div class="content-area">
