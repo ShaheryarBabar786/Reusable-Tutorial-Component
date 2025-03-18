@@ -7,9 +7,11 @@
   padding: 20px;
   overflow: hidden;
 }
+
 lib-menu-btn .menu-item {
   color: white !important;
 }
+
 .demo-component {
   width: 100%;
   display: flex;
@@ -27,17 +29,24 @@ lib-menu-btn .menu-item {
 
 .input-list {
   width: 100%;
-  max-width: 400px;
+  max-width: 700px;
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items:center;
+  text-align: center;
 }
 
 .input-field {
-  width: 100%;
+  flex: 1 1 calc(50% - 10px); /* Two input fields per row with gap */
   padding: 8px;
   margin: 5px 0;
   background: #333;
   color: white;
   border: 1px solid #555;
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 
 /* Position dropdown at the top-right corner */
@@ -63,4 +72,19 @@ lib-menu-btn .menu-item {
   border: 1px solid #555;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+  .input-field {
+    flex: 1 1 100%; /* One input field per row on mobile */
+    margin-top: 0;
+    gap: 5px;
+  }
+  .input-list {
+    width: 100%;
+    margin-top: 10px;
+
+
+  }
 }

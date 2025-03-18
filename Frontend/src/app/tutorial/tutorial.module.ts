@@ -4,9 +4,10 @@ import { ButtonsModule, LibAutoDelegationModalComponent, LibModalModule } from '
 import { TutorialScreenComponent } from './components/tutorial-screen/tutorial-screen.component';
 import { TutorialRoutingModule } from './tutorial-routing.module';
 import { TutorialComponent } from './tutorial.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
-  declarations: [TutorialComponent, TutorialScreenComponent], // ✅ Make sure both components are here
+  declarations: [TutorialComponent, TutorialScreenComponent,ChatComponent], // ✅ Make sure both components are here
   imports: [CommonModule, TutorialRoutingModule, ButtonsModule, LibModalModule, LibAutoDelegationModalComponent], // ✅ Ensure required modules are imported
   exports: [TutorialComponent, TutorialScreenComponent],
   providers: [LibAutoDelegationModalComponent],

@@ -45,7 +45,6 @@
   border: none;
   color: white;
   box-shadow: none;
-  font-size: 24px;
   cursor: pointer;
 }
 
@@ -63,17 +62,15 @@
 .content-box {
   flex: 1;
   text-align: left;
-  font-size: 16px;
   line-height: 1.5;
   max-width: 60%;
 }
 
 /* Paragraph styling */
 p {
-  // font-family: 'Gilroy-Regular', sans-serif;
   font-family: 'Gilroy';
   font-weight: 400;
-  font-size: 18.41px;
+  font-size: 16.41px;
   font-style: normal;
 
   // line-height: 1.6;
@@ -243,6 +240,17 @@ lib-icon-btn.active {
   border: 0.400336px solid #255685;
 }
 
+.button-wrapper.dim {
+  opacity: 0.4;
+  filter: grayscale(100%);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.button-wrapper:not(.dim) {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
 /* Icon inside lib-icon-btn */
 lib-icon-btn span {
   display: flex;
@@ -256,6 +264,11 @@ lib-icon-btn span {
 lib-icon-btn span svg {
   fill: rgba(255, 255, 255, 0.8);
 }
+lib-icon-btn{
+  width: 30px;
+  height: 30px;
+}
+
 .leader-line {
   z-index: 9999 !important;
   position: relative !important;
@@ -385,6 +398,9 @@ lib-icon-btn span svg {
   lib-icon-btn{
     width: 40px;
     height: 40px;
+  }
+  .content-box p{
+    font-size: 18.41px;
   }
   .button-wrapper:nth-child(7) lib-icon-btn {
     width: 55px;

@@ -3,7 +3,7 @@
     <!-- Single container for all screens -->
     <div class="tutorial-container"
          *ngFor="let item of (isMobile() ? [tutorialItems[selectedIndex]] : selectedItems); let i = index">
-      <lib-icon-btn class="close-btn" (click)="closeTutorial()"> &#10005; </lib-icon-btn>
+      <lib-bubble-btn [variant]='bubbleBtnType' class="close-btn" [title]="'&#215;'" (click)="closeTutorial()">  </lib-bubble-btn>
 
       <div class="content-area">
         <!-- Content Box -->
@@ -13,14 +13,18 @@
 
         <!-- Buttons Container -->
         <div class="buttons-container">
-          <div class="button-wrapper" *ngFor="let btn of tutorialItems; let j = index">
-            <div #button>
-              <lib-icon-btn (click)="selectItem(btn, j, i)" [class.active]="item === btn">
-                <span [innerHTML]="sanitize(btn.icon)"></span>
-              </lib-icon-btn>
-            </div>
-            <span class="button-label" [innerHTML]="formatLabel(btn.label)"></span>
-          </div>
+          <div class="button-wrapper"
+     *ngFor="let btn of tutorialItems; let j = index"
+     [class.dim]="isButtonDimmed(j, i)">
+  <div #button>
+    <lib-icon-btn
+      (click)="selectItem(btn, j, i)"
+      [class.active]="item === btn">
+      <span [innerHTML]="sanitize(btn.icon)"></span>
+    </lib-icon-btn>
+  </div>
+  <span class="button-label" [innerHTML]="formatLabel(btn.label)"></span>
+</div>
         </div>
       </div>
     </div>

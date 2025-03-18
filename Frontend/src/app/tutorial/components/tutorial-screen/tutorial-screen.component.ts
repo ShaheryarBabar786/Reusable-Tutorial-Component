@@ -19,7 +19,7 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
   leaderLines: LeaderLine[] = [];
   toggleModal: boolean = false;
   selectedIndex: number = 0;
-
+  activeButtonIndices: (number | null)[] = [null, null, null];
   @ViewChildren('contentBox') contentBoxes!: QueryList<ElementRef>;
   @ViewChildren('button') buttons!: QueryList<ElementRef>;
   isOpenContent: any;
@@ -54,6 +54,7 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
     this.modalService.modalState$.subscribe((isOpen) => {
       this.toggleModal = isOpen;
     });
+    this.activeButtonIndices = [null, null, null];
 
     this.translateService.onLangChange.subscribe(() => {
       this.loadTutorialScreens();
@@ -107,15 +108,23 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
 
   selectItem(item: TutorialScreen, buttonIndex: number, containerIndex: number): void {
     if (item.id === '5') {
-      this.router.navigate(['/chat']);
+      this.router.navigate(['/tutorial/chat']);
     } else {
       this.selectedItems[containerIndex] = item;
       if (this.isMobile()) {
         this.selectedIndex = buttonIndex;
       }
+
+      // Update the active button index for the current screen
+      this.activeButtonIndices[containerIndex] = buttonIndex;
+
       this.cdr.detectChanges();
       this.drawArrows();
     }
+  }
+  isButtonDimmed(buttonIndex: number, containerIndex: number): boolean {
+    const activeIndex = this.activeButtonIndices[containerIndex];
+    return activeIndex !== null && activeIndex !== buttonIndex;
   }
   drawArrows(): void {
     this.cleanUpArrows();
@@ -179,6 +188,7 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
   }
 
   closeTutorial(): void {
+    this.activeButtonIndices = [null, null, null];
     this.leaderLines.forEach(line => line.remove());
     this.leaderLines = [];
     this.router.navigate(['/']);

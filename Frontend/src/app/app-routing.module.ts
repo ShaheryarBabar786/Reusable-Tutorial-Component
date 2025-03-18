@@ -5,7 +5,7 @@ import { TutorialComponent } from './tutorial/tutorial.component';
 
 const routes: Routes = [
   { path: '', component: IntroComponent },
-  { path: 'tutorial', component: TutorialComponent },
+  { path: 'tutorial', loadChildren: () => import('./tutorial/tutorial.module').then(m => m.TutorialModule) },
 ];
 
 @NgModule({
