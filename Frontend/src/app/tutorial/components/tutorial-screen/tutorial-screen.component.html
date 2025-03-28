@@ -14,15 +14,27 @@
         <!-- Buttons Container -->
         <div class="buttons-container">
           <div class="button-wrapper"
-     *ngFor="let btn of tutorialItems; let j = index"
+     *ngFor="let btn of tutorialItems; let j = index trackBy: trackByButtonId"
      [class.dim]="isButtonDimmed(j, i)">
-  <div #button>
+
+  <div #button class="button-container">
     <lib-icon-btn
       (click)="selectItem(btn, j, i)"
       [class.active]="item === btn">
       <span [innerHTML]="sanitize(btn.icon)"></span>
+
     </lib-icon-btn>
+    <div class="lens-flare" *ngIf="hasLensFlare(btn.id)">
+      <div class="flare-horizontal"></div>
+      <div class="flare-vertical"></div>
+    </div>
+
+    <!-- Updated to use getAnnotationDotStyle -->
+    <div class="annotation-dot"
+         *ngIf="hasAnnotation(btn.id)"
+         [ngStyle]="getAnnotationDotStyle(btn.id)"></div>
   </div>
+
   <span class="button-label" [innerHTML]="formatLabel(btn.label)"></span>
 </div>
         </div>

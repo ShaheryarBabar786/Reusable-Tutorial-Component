@@ -98,6 +98,7 @@ p {
   position: relative;
   transform: scale(calc(1 + (min(100vw, 100vh) - 600px) / 1000));
   transform-origin: top left;
+  display: inline-block;
 }
 
 /* Button wrapper styling */
@@ -105,6 +106,10 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 10px;
+  position: relative;
+  will-change: opacity, filter;
+  backface-visibility: hidden;
 }
 
 /* Specific button wrapper adjustments */
@@ -131,7 +136,7 @@ p {
 .button-wrapper:nth-child(7) .button-label {
   position: relative;
   right: 10px;
-  font-size: 10px;
+  font-size: 8px;
 }
 
 .button-wrapper:nth-child(7) lib-icon-btn span {
@@ -142,7 +147,7 @@ p {
 .button-wrapper:nth-child(8) lib-icon-btn {
   position: relative;
   right: 5px;
-  bottom: 7px;
+  top: -5px;
 }
 
 .button-wrapper:nth-child(8) .button-label {
@@ -165,8 +170,14 @@ p {
 
 .button-wrapper:nth-child(11) {
   position: absolute;
-  top: 360px;
+  top: 365px;
   right: 70px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(0.95); }
 }
 
 /* Button label styling */
@@ -230,6 +241,7 @@ lib-icon-btn::after {
   z-index: 0;
 }
 
+
 /* Hover effect for lib-icon-btn */
 lib-icon-btn:hover {
   transform: scale(1.05);
@@ -240,15 +252,31 @@ lib-icon-btn.active {
   border: 0.400336px solid #255685;
 }
 
+/* Current dimming style - modify this */
 .button-wrapper.dim {
   opacity: 0.4;
+  /* Remove the global grayscale filter */
+  filter: none;
+  transition: opacity 0.1s ease, filter 0.1s ease;
+}
+
+/* Add specific grayscale only to the button (not the dot) */
+.button-wrapper.dim lib-icon-btn {
   filter: grayscale(100%);
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  transition: filter 0.1s ease;
+}
+
+/* Ensure annotation dot stays pink even when dimmed */
+.button-wrapper.dim .annotation-dot {
+  opacity: 0.4; /* Match the wrapper's opacity */
+  filter: none; /* Explicitly remove any filters */
+  background-color: #ff4e88; /* Ensure color stays pink */
 }
 
 .button-wrapper:not(.dim) {
   opacity: 1;
-  filter: grayscale(0%);
+  filter: none;
+  transition: opacity 0.1s ease, filter 0.1s ease;
 }
 
 /* Icon inside lib-icon-btn */
@@ -267,6 +295,23 @@ lib-icon-btn span svg {
 lib-icon-btn{
   width: 30px;
   height: 30px;
+}
+
+::ng-deep lib-bubble-btn.close-btn button {
+  width: 25px !important;
+  height: 25px !important;
+  padding: 0 !important;
+
+}
+::ng-deep lib-bubble-btn.close-btn .title {
+  font-size: 25px !important;
+  color: gray;
+
+}
+
+lib-bubble-btn.close-btn {
+  width: 30px !important;
+  height:30px !important;
 }
 
 .leader-line {
@@ -363,6 +408,7 @@ lib-icon-btn{
   }
 }
 
+
 /* Mobile-specific styles */
 @media (max-width: 600px) {
   .container {
@@ -395,9 +441,25 @@ lib-icon-btn{
     margin: 0;
     padding: 10px;
   }
+  ::ng-deep lib-bubble-btn.close-btn button {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+
+  }
+  ::ng-deep lib-bubble-btn.close-btn .title {
+    font-size: 30px !important;
+    color: gray;
+
+  }
+
+  lib-bubble-btn.close-btn {
+    width: 50px !important;
+    height:50px !important;
+  }
   lib-icon-btn{
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
   }
   .content-box p{
     font-size: 18.41px;
@@ -407,26 +469,43 @@ lib-icon-btn{
     height: 55px;
 
   }
+  .button-wrapper:nth-child(7) .button-label {
+    position: relative;
+    right: 10px;
+    top: -10px;
+    font-size: 9px;
+  }
+  .button-wrapper:nth-child(6) lib-icon-btn {
+    width: 40px;
+    height: 40px;
+    top: -3px;
+  }
   .button-wrapper{
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+  }
+  .button-wrapper:nth-child(8) {
+    position: relative;
+    right: -2px;
+    top: 0px;
   }
   .button-wrapper:nth-child(9) {
 
-    top: 370px;
-    right: 60px;
+    top: 345px;
+    right: 62px;
   }
 
   .button-wrapper:nth-child(10) {
 
-    top: 420px;
+    top: 400px;
     right: 90px;
   }
 
   .button-wrapper:nth-child(11) {
 
-    top: 470px;
-    right: 65px;
+    top: 455px;
+    right: 62px;
   }
+
 
 
   /* Hide other elements on mobile */
@@ -468,3 +547,84 @@ lib-icon-btn{
     overflow-x: hidden;
   }
 }
+
+.lens-flare {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 999;
+}
+
+.flare-horizontal, .flare-vertical {
+  position: absolute;
+  background: white;
+  opacity: 1;
+  filter: blur;
+}
+
+/* Horizontal Light Streak */
+.flare-horizontal {
+  width: 30px;
+  height: 1px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(255,255,255,0.1) 20%,
+    rgba(255,255,255,1) 50%,
+    rgba(255,255,255,0.1) 80%,
+    transparent 100%);
+
+}
+
+/* Vertical Light Streak */
+.flare-vertical {
+  width: 1px;
+  height: 30px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.1) 20%,
+    rgba(255,255,255,0.8) 50%,
+    rgba(255,255,255,0.1) 80%,
+    transparent 100%);
+}
+
+/* Add animation for the lens flare */
+@keyframes flare-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
+}
+
+/* Apply animation to the lens flare */
+.lens-flare {
+  animation: flare-pulse 3s ease-in-out infinite;
+}
+.button-wrapper:nth-child(8) .lens-flare {
+  transform: translateX(-10px) translateY(-10px);
+}
+.button-wrapper:nth-child(2) .lens-flare {
+  transform: translateX(-4px) translateY(-10px);
+}
+.button-wrapper:nth-child(9) .lens-flare {
+  transform: translateX(-10px) translateY(-10px);
+}
+
+
+
+
+
+
+
+
+
+
