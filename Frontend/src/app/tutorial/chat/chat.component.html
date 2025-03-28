@@ -1,4 +1,22 @@
 <div class="chat-container">
   <button class="close-btn" (click)="goToHome()">&#215;</button>
   <p class="chat-text">This is the chat route</p>
+
+  <ng-container #dynamicModal></ng-container>
+
+  <!-- ✅ Nex Sapien Modal: `isOpen` controls visibility -->
+  <lib-popup
+    [isOpen]="toggleModal"
+    [confirmButton]="'Confirm'"
+    [cancelButton]="'Cancel'"
+    [title]="'Warning'"
+    [message]="'This is a test warning message'"
+    [progBarCurrentStep]="3"
+    [progBarTotalSteps]="5"
+    [backdropDismiss]="true"
+    (modalDismiss)="onModalDismiss()"
+    (afterCloseEvent)="closeModal()">
+  </lib-popup>
+
+  <button class="app-primary-button" (click)="openModal()">Open Modal</button>
 </div>

@@ -38,8 +38,9 @@ lerna-debug.log*
 *.sublime-workspace
 
 # Environment Variables
-.env
 Frontend/.env
 Frontend/.env.local
 Mock-Backend/.env
 Mock-Backend/.env.local
+config.bat
+node_modules

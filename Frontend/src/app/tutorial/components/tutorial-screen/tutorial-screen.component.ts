@@ -23,6 +23,29 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('contentBox') contentBoxes!: QueryList<ElementRef>;
   @ViewChildren('button') buttons!: QueryList<ElementRef>;
   isOpenContent: any;
+  annotatedButtonIds = ['4','5','8','10','11'];
+  lensFlareButtonIds = ['2','8','9'];
+
+  // Position configuration
+  dotPositionOverrides: {[key: string]: {top: string, right: string}} = {
+    '6': { top: '0px', right: '18px' },
+    '7': { top: '3px', right: '15px' },
+    '8': { top: '-5px', right: '19px' },
+    '9':{ top: '0px', right: '0px'},
+    '10':{ top: '0px', right: '0px'},
+    '11':{ top: '0px', right: '0px'},
+    'default': { top: '0px', right: '12px' }
+  };
+  dotPositionMobileOverrides: {[key: string]: {top: string, right: string}} = {
+    '6': { top: '0px', right: '15px' },
+    '7': { top: '3px', right: '12px' },
+    '8': { top: '0px', right: '9px' },
+    '9': { top: '7px', right: '0px' },
+    '10': { top: '7px', right: '0px' },
+    '11': { top: '7px', right: '0px' },
+    'default': { top: '5px', right: '4px' }
+  };
+
 
   contentClasses: { [key: string]: string } = {
     '1': 'content-1',
@@ -222,4 +245,39 @@ export class TutorialScreenComponent implements AfterViewInit, OnDestroy {
     const highlightedContent = formattedContent.replace(/\*\*(.*?)\*\*/g, '<span class="red-highlight">$1</span>');
     return this.sanitizer.bypassSecurityTrustHtml(highlightedContent);
   }
+  hasAnnotation(id: string): boolean {
+    return this.annotatedButtonIds.includes(id);
+  }
+
+  trackByButtonId(index: number, btn: any): string {
+    return btn.id; // Ensures Angular only updates changed buttons
+  }
+  // Add this new function
+  getAnnotationDotStyle(id: string): any {
+    const isMobile = this.isMobile();
+    const positionOverrides = isMobile ? this.dotPositionMobileOverrides : this.dotPositionOverrides;
+    const position = positionOverrides[id] || positionOverrides['default'];
+
+    const dotSize = isMobile ? '8px' : '8px';
+    const shadowSize = isMobile ? '2px' : '2px';
+
+    return {
+      position: 'absolute',
+      top: position.top,
+      right: position.right,
+      width: dotSize,
+      height: dotSize,
+      'background-color': '#ff4e88',
+      'border-radius': '50%',
+      'box-shadow': `0 0 0 ${shadowSize} rgba(255, 78, 136, 0.3)`,
+      'z-index': '10',
+      'animation': 'pulse 2s infinite'
+    };
+  }
+
+  hasLensFlare(id: string): boolean {
+    return this.lensFlareButtonIds.includes(id);
+  }
+
+
 }
